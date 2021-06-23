@@ -27,6 +27,7 @@ console.log("Exiting the file System");
 fs.readFile("./myFunction.js", "utf8", (error, data) => {
   if (error) console.log(error);
   else console.log("myFunction.js file contains: ", data);
+  emitter.emit("myEvent", 4, 5);
 });
 
 // 3- NodeJS Third Party Module
@@ -60,6 +61,19 @@ const http = require("http");
 const server = http.createServer(function (req, res) {
   res.write("<h1>Introducion to Node Js</h1>");
   res.end();
+});
+
+// Event Emitter
+
+// 1 -
+
+const EventEmitter = require("events");
+const emitter = new EventEmitter();
+
+// 2- Event definition
+
+emitter.on("myEvent", (x, y) => {
+  console.log("Listener called", x + y);
 });
 
 server.listen(8000, (err) => {
